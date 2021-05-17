@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoldBadgeConsoleApplicationChallenges
+namespace _01_Challenge_Repository
 {
     public class MenuItem
     {

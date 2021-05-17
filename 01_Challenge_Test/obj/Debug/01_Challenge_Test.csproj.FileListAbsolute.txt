@@ -1,0 +1,17 @@
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\bin\Debug\01_Challenge_Test.dll
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\bin\Debug\01_Challenge_Test.pdb
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\bin\Debug\01_Challenge_Repository.dll
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\bin\Debug\01_Challenge_Repository.pdb
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\bin\Debug\01_Challenge_Repository.dll.config
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\obj\Debug\01_Challenge_Test.csprojAssemblyReference.cache
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\obj\Debug\01_Challenge_Test.csproj.CoreCompileInputs.cache
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\obj\Debug\01_Challenge_Test.csproj.CopyComplete
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\obj\Debug\01_Challenge_Test.dll
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\01_Challenge_Test\obj\Debug\01_Challenge_Test.pdb

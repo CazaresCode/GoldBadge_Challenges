@@ -4,16 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoldBadgeConsoleApplicationChallenges.KomodoCafe_Repository
+namespace _01_Challenge_Repository
 {
     public class MenuItemRepository
     {
-        private List<MenuItem> _listOfMenuItems = new List<MenuItem>();
+        private readonly List<MenuItem> _listOfMenuItems = new List<MenuItem>();
 
         // Create
-        public void AddMenuItemToList(MenuItem item)
+        public bool AddMenuItemToDirectory(MenuItem item)
         {
+            int startingCount = _listOfMenuItems.Count;
             _listOfMenuItems.Add(item);
+            bool wasAdded = _listOfMenuItems.Count > startingCount;
+            return wasAdded;
         }
 
         // Read
@@ -22,10 +25,23 @@ namespace GoldBadgeConsoleApplicationChallenges.KomodoCafe_Repository
             return _listOfMenuItems;
         }
 
+        public MenuItem GetMenuItemByName(string menuItemName)
+        {
+            foreach (MenuItem item in _listOfMenuItems)
+            {
+                if (item.MealName.ToLower() == menuItemName.ToLower())
+                {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+
         // Update
         public bool UpdateExisitingMenuItemByName(string menuItemName, MenuItem updatedMenuItemName)
         {
-            MenuItem oldItem = GetMenuItemByName(menuItemName);
+            MenuItem oldItem = GetMenuItemByName(menuItemName.ToLower());
 
             if (oldItem != null)
             {
@@ -42,7 +58,6 @@ namespace GoldBadgeConsoleApplicationChallenges.KomodoCafe_Repository
                 return false;
             }
         }
-
 
         // Delete
         public bool RemoveMenuItemFromList(string menuItemName)
@@ -70,17 +85,5 @@ namespace GoldBadgeConsoleApplicationChallenges.KomodoCafe_Repository
 
         // Helper Methods
 
-        private MenuItem GetMenuItemByName(string menuItemName)
-        {
-            foreach (MenuItem item in _listOfMenuItems)
-            {
-                if (item.MealName == menuItemName)
-                {
-                    return item;
-                }
-            }
-
-            return null;
-        }
     }
 }
