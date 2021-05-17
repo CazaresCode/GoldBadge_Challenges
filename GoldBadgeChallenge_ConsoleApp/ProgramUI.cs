@@ -118,12 +118,14 @@ namespace GoldBadgeChallenge_ConsoleApp
         //    }
         //}
 
+
+        // NEEDS A CATCH IF THE ENTERED NAME/NUM DOES NOT MATCH, THEN YOU NEED TO ENTER SOMETHING VALID
         private void UpdateItemByName()
         {
             Console.Clear();
             DisplayOnlyMealItemByNumAndName();
 
-            Console.WriteLine("Please enter the NAME of the menu item you would like to update:");
+            Console.WriteLine("\nPlease enter the NAME of the menu item you would like to update:");
 
             string oldItem = Console.ReadLine();
             MenuItem newItem = GetValuesForMenuItemObjects();
@@ -132,7 +134,7 @@ namespace GoldBadgeChallenge_ConsoleApp
             
             if (wasAdded)
             {
-                Console.WriteLine("The menu item was updated successfully!");
+                Console.WriteLine("\nThe menu item was updated successfully!");
             }
             else
             {
@@ -184,10 +186,12 @@ namespace GoldBadgeChallenge_ConsoleApp
 
         private void DisplayAllMenuItemProp(MenuItem item)
         {
+            string combindedString = string.Join(", ", item.Ingredients);
+
             Console.WriteLine($"\n\t#{item.MealNumber}\n" +
                 $"\tName: {item.MealName}\n" +
                 $"\tDescription: {item.Description}\n" +
-                $"\tIngredients: {item.Ingredients}\n" +
+                $"\tIngredients: {combindedString}\n" +
                 $"\tPrice: ${item.Price}\n");
         }
 
@@ -195,7 +199,7 @@ namespace GoldBadgeChallenge_ConsoleApp
         {
             foreach (var item in _repo.GetMenuItems())
             {
-                Console.WriteLine($"\t#{item.MealNumber}\n" +
+                Console.WriteLine($"\n\t#{item.MealNumber}\n" +
                 $"\tName: {item.MealName}");
             }
         }
