@@ -19,8 +19,6 @@ namespace _01_Challenge_Test
             _repo.AddMenuItemToDirectory(_menuItem);
         }
 
-            //Create a Test Class for your repository methods. (You don't need to test your constructors or objects, just your methods)
-
         [TestMethod]
         public void AddMenuItemToDirectory_ShouldGetCorrectBoolean()
         {
