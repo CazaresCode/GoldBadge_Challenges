@@ -14,7 +14,7 @@ namespace GoldBadgeConsoleApplicationChallenges
         public List<string> Ingredients { get; set; }
         public double Price { get; set; }
 
-        public MenuItem() { } // do we need an empty one?
+        // public MenuItem() { }
 
         public MenuItem(int mealNumber, string mealName, string description, List<string> ingredients, double price)
         {

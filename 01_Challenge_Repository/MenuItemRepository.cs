@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace GoldBadgeConsoleApplicationChallenges.KomodoCafe_Repository
 {
-    public class MenuItem_Repository
+    public class MenuItemRepository
     {
         private List<MenuItem> _listOfMenuItems = new List<MenuItem>();
 
         // Create
-        public void AddMenuToList(MenuItem item)
+        public void AddMenuItemToList(MenuItem item)
         {
             _listOfMenuItems.Add(item);
         }
