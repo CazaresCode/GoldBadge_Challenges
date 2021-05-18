@@ -38,10 +38,23 @@ namespace _01_Challenge_Repository
             return null;
         }
 
-        // Update
-        public bool UpdateExisitingMenuItemByName(string menuItemName, MenuItem updatedMenuItemName)
+        public MenuItem GetMenuItemByNumber(int menuNumber)
         {
-            MenuItem oldItem = GetMenuItemByName(menuItemName.ToLower());
+            foreach (var item in _listOfMenuItems)
+            {
+                if (item.MealNumber == menuNumber)
+                {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+
+        // Update
+        public bool UpdateExisitingMenuItemByNumber(int menuItemName, MenuItem updatedMenuItemName)
+        {
+            MenuItem oldItem = GetMenuItemByNumber(menuItemName);
 
             if (oldItem != null)
             {
@@ -60,9 +73,9 @@ namespace _01_Challenge_Repository
         }
 
         // Delete
-        public bool RemoveMenuItemFromList(string menuItemName)
+        public bool RemoveMenuItemFromListByNumber(int menuItemNum)
         {
-            MenuItem item = GetMenuItemByName(menuItemName);
+            MenuItem item = GetMenuItemByNumber(menuItemNum);
 
             if (item == null)
             {
@@ -82,8 +95,5 @@ namespace _01_Challenge_Repository
                 return false;
             }
         }
-
-        // Helper Methods
-
     }
 }

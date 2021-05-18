@@ -16,7 +16,7 @@ namespace GoldBadgeChallenge_ConsoleApp
             SeedMenuItems();
             while (Menu())
             {
-                Console.WriteLine("Press any key to continue...");
+                Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -29,9 +29,10 @@ namespace GoldBadgeChallenge_ConsoleApp
                 "1. Add a New Menu Item\n" +
                 "2. Get a List of Menu Items\n" +
                 "3. Get a Menu Item By Name\n" +
-                "4. Update Exisiting Menu Item By Name\n" +
-                "5. Remove a Menu Item\n" +
-                "6. Exit");
+                "4. Get a Menu Item By Number\n" +
+                "5. Update Exisiting Menu Item By Name\n" +
+                "6. Remove a Menu Item\n" +
+                "7. Exit");
 
             string input = Console.ReadLine().ToLower();
 
@@ -47,15 +48,18 @@ namespace GoldBadgeChallenge_ConsoleApp
                     GetItemByName();
                     break;
                 case "4":
-                    UpdateItemByName();
+                    DisplayMenuItemByNumber();
                     break;
                 case "5":
-                    RemoveItem();
+                    UpdateItemByNum();
                     break;
                 case "6":
+                    RemoveItem();
+                    break;
+                case "7":
                     return false;
                 default:
-                    Console.WriteLine("Please enter a vaild number");
+                    Console.WriteLine("\nPlease enter a vaild number");
                     return true;
             }
             return true;
@@ -78,10 +82,11 @@ namespace GoldBadgeChallenge_ConsoleApp
                 DisplayAllMenuItemProp(item);
             }
         }
+
         private void GetItemByName()
         {
             Console.Clear();
-            DisplayOnlyMealItemByNumAndName();
+            ShowOnlyMealItemByNumAndName();
             Console.WriteLine("\nPlease enter the NAME of the menu item you would like to display:\n");
 
             MenuItem menuItem = _repo.GetMenuItemByName(Console.ReadLine());
@@ -95,66 +100,71 @@ namespace GoldBadgeChallenge_ConsoleApp
                 Console.WriteLine("\nThere is no menu item with that NAME.");
             }
         }
-        
 
-        //IF TIME PLEASE ADD THIS AS AN OPTION
-        //private void GetItemByNumber()
-        //{
-        //    Console.Clear();
-        //    DisplayOnlyMealItemByNumAndName();
-        //    Console.WriteLine("Please enter the number you would like to see:");
-        //    int menuItemNum = Convert.ToInt32(Console.ReadLine());
+        private void DisplayMenuItemByNumber()
+        {
+            Console.ReadLine();
+            ShowOnlyMealItemByNumAndName();
 
-        //    foreach (MenuItem item in _repo.GetMenuItems())
-        //    {
-        //        if (menuItemNum == item.MealNumber)
-        //        {
-        //            DisplayAllMenuItemProp(item);
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("There is no menu item by that number.");
-        //        }
-        //    }
-        //}
+            Console.WriteLine("\nEnter the NUMBER of the menu item you would like to see:");
 
+            bool itemWasFound = Int32.TryParse(Console.ReadLine(), out int result);
 
-        // NEEDS A CATCH IF THE ENTERED NAME/NUM DOES NOT MATCH, THEN YOU NEED TO ENTER SOMETHING VALID
-        private void UpdateItemByName()
+            if (itemWasFound)
+            {
+                MenuItem itemToUpdate = _repo.GetMenuItemByNumber(result);
+
+                if (itemToUpdate != null)
+                {
+                    DisplayAllMenuItemProp(itemToUpdate);
+                }
+                else
+                {
+                    Console.WriteLine("\nThere is no menu item with that number.");
+                }
+            }
+        }
+
+        private void UpdateItemByNum()
         {
             Console.Clear();
-            DisplayOnlyMealItemByNumAndName();
+            ShowOnlyMealItemByNumAndName();
 
-            Console.WriteLine("\nPlease enter the NAME of the menu item you would like to update:");
+            Console.WriteLine("\nPlease enter the NUMBER of the menu item you would like to update:");
 
-            string oldItem = Console.ReadLine();
-            MenuItem newItem = GetValuesForMenuItemObjects();
+            bool newItemFound = Int32.TryParse(Console.ReadLine(), out int result);
 
-            bool wasAdded = _repo.UpdateExisitingMenuItemByName(oldItem, newItem);
-            
-            if (wasAdded)
+            if (newItemFound)
             {
-                Console.WriteLine("\nThe menu item was updated successfully!");
-            }
-            else
-            {
-                Console.WriteLine("There is no menu item by that name.");
+                MenuItem newItem = _repo.GetMenuItemByNumber(result);
+
+                if (newItem != null)
+                {
+                    MenuItem menuItem = GetValuesForMenuItemObjects();
+                    _repo.UpdateExisitingMenuItemByNumber(result, menuItem);
+                    Console.WriteLine("\nThe menu item was updated successfully!");
+                }
+                else
+                {
+                    Console.WriteLine("\nThere is no menu item by that name.");
+
+                }
             }
         }
 
         private void RemoveItem()
         {
             Console.Clear();
-            DisplayOnlyMealItemByNumAndName();
-            Console.WriteLine("Enter the name of the menu item you would like to delete:\n");
+            ShowOnlyMealItemByNumAndName();
+            Console.WriteLine("\nEnter the NUMBER of the menu item you would like to delete:\n");
 
-            if (_repo.RemoveMenuItemFromList(Console.ReadLine()))
+            if (_repo.RemoveMenuItemFromListByNumber(int.Parse(Console.ReadLine())))
             {
-                Console.WriteLine("The menu item was successfully deleted!");
+                Console.WriteLine("\nThe menu item was successfully deleted!");
             }
             else
             {
-                Console.WriteLine("The menu item was not successfully deleted.");
+                Console.WriteLine("\nThe menu item was not successfully deleted.");
             }
         }
 
@@ -162,7 +172,7 @@ namespace GoldBadgeChallenge_ConsoleApp
         {
             Console.Clear();
 
-            Console.WriteLine("Enter the menu item number:");
+            Console.WriteLine("\nEnter the menu item number:");
             int mealNum = Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine("\nEnter the name of the menu item:");
@@ -195,40 +205,12 @@ namespace GoldBadgeChallenge_ConsoleApp
                 $"\tPrice: ${item.Price}\n");
         }
 
-        private void DisplayOnlyMealItemByNumAndName()
+        private void ShowOnlyMealItemByNumAndName()
         {
             foreach (var item in _repo.GetMenuItems())
             {
                 Console.WriteLine($"\n\t#{item.MealNumber}\n" +
                 $"\tName: {item.MealName}");
-            }
-        }
-
-        private void GetMenuItemByNameOrNum()
-        {
-            DisplayOnlyMealItemByNumAndName();
-            Console.WriteLine("Please enter the number OR the name of the item you would like to display:");
-
-            string input = Console.ReadLine().ToLower();
-            bool successful = Int32.TryParse(input, out int result);
-
-            foreach (var item in _repo.GetMenuItems())
-            {
-                if (item.MealName == input)
-                {
-                    DisplayAllMenuItemProp(item);
-                }
-                else if (successful == true)
-                {
-                    if (item.MealNumber == result)
-                    {
-                        DisplayAllMenuItemProp(item);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("There is no menu item by that NAME or NUMBER.");
-                }
             }
         }
 
