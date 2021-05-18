@@ -7,7 +7,7 @@
     <ProjectGuid>{420D38CE-E9AC-40A9-ADF2-EE129E1CFB3B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>_02_Challenge_Console</RootNamespace>
-    <AssemblyName>_02_Challenge_Console</AssemblyName>
+    <AssemblyName>02_Challenge_Console</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

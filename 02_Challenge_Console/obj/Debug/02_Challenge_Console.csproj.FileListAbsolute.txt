@@ -1,0 +1,6 @@
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\02_Challenge_Console\bin\Debug\02_Challenge_Console.exe.config
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\02_Challenge_Console\bin\Debug\02_Challenge_Console.exe
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\02_Challenge_Console\bin\Debug\02_Challenge_Console.pdb
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\02_Challenge_Console\obj\Debug\02_Challenge_Console.csproj.CoreCompileInputs.cache
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\02_Challenge_Console\obj\Debug\02_Challenge_Console.exe
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\02_Challenge_Console\obj\Debug\02_Challenge_Console.pdb

@@ -47,22 +47,21 @@ namespace _01_Challenge_Repository
                     return item;
                 }
             }
-
             return null;
         }
 
         // Update
-        public bool UpdateExisitingMenuItemByNumber(int menuItemName, MenuItem updatedMenuItemName)
+        public bool UpdateExisitingMenuItemByNumber(int menuItemNum, MenuItem updatedMenuItem)
         {
-            MenuItem oldItem = GetMenuItemByNumber(menuItemName);
+            MenuItem oldItem = GetMenuItemByNumber(menuItemNum);
 
             if (oldItem != null)
             {
-                oldItem.MealNumber = updatedMenuItemName.MealNumber;
-                oldItem.MealName = updatedMenuItemName.MealName;
-                oldItem.Description = updatedMenuItemName.Description;
-                oldItem.Ingredients = updatedMenuItemName.Ingredients;
-                oldItem.Price = updatedMenuItemName.Price;
+                oldItem.MealNumber = updatedMenuItem.MealNumber;
+                oldItem.MealName = updatedMenuItem.MealName;
+                oldItem.Description = updatedMenuItem.Description;
+                oldItem.Ingredients = updatedMenuItem.Ingredients;
+                oldItem.Price = updatedMenuItem.Price;
 
                 return true;
             }
@@ -88,7 +87,6 @@ namespace _01_Challenge_Repository
             if (intialCount > _listOfMenuItems.Count)
             {
                 return true;
-                //could add a cw successfully removed item...
             }
             else
             {

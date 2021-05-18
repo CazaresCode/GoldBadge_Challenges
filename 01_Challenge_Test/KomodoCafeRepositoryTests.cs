@@ -42,17 +42,17 @@ namespace _01_Challenge_Test
         }
 
         [TestMethod]
-        public void UpdateExisitingMenuItemByName_ShouldReturnUpdatedValue()
+        public void UpdateExisitingMenuItemByNumber_ShouldReturnUpdatedValue()
         {
-            _repo.UpdateExisitingMenuItemByName("sammie", new MenuItem(1, "Cuban Sammie", "a very simple  Cuban sandwich", new List<string> { "French Sword Bread", "Ham", "White Cheese", "Grey Poupon" }, 15.95));
+            _repo.UpdateExisitingMenuItemByNumber(3, new MenuItem(1, "Cuban Sammie", "a very simple  Cuban sandwich", new List<string> { "French Sword Bread", "Ham", "White Cheese", "Grey Poupon" }, 15.95));
 
-            Assert.AreEqual(_menuItem.MealName.ToLower(), "cuBan sAMmie".ToLower());
+            Assert.AreEqual(_menuItem.MealNumber, 1);
         }
 
         [TestMethod]
         public void RemoveMenuItemFromList_ShouldReturnTrue()
         {
-            bool wasDeleted = _repo.RemoveMenuItemFromList(_menuItem.MealName);
+            bool wasDeleted = _repo.RemoveMenuItemFromListByNumber(_menuItem.MealNumber);
 
             Assert.IsTrue(wasDeleted);
         }
