@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _02_Challenge_Repository
 {
-    public enum ClaimType { Car, Home, Theft }
+    public enum ClaimType { Car = 1, Home, Theft }
 
     public class Claim
     {
@@ -26,10 +26,12 @@ namespace _02_Challenge_Repository
 
                 if (differenceOfDatesInDays <= 30)
                 {
+                    Console.WriteLine("This claim is valid.");
                     return true;
                 }
                 else
                 {
+                    Console.WriteLine("This claim is NOT valid.");
                     return false;
                 }
             }
