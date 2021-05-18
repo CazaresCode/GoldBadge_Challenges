@@ -50,5 +50,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\02_Challenge_Repository\02_Challenge_Repository.csproj">
+      <Project>{CE805654-17F0-408E-95EE-84539897B21E}</Project>
+      <Name>02_Challenge_Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,3 +12,5 @@ C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeCh
 C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\02_Challenge_Test\obj\Debug\02_Challenge_Test.csproj.CopyComplete
 C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\02_Challenge_Test\obj\Debug\02_Challenge_Test.dll
 C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\02_Challenge_Test\obj\Debug\02_Challenge_Test.pdb
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\02_Challenge_Test\bin\Debug\02_Challenge_Repository.dll
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\02_Challenge_Test\bin\Debug\02_Challenge_Repository.pdb

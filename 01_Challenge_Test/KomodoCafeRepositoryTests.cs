@@ -20,7 +20,7 @@ namespace _01_Challenge_Test
         }
 
         [TestMethod]
-        public void AddMenuItemToDirectory_ShouldGetCorrectBoolean()
+        public void AddMenuItemToDirectory_ShouldBeTrue()
         {
             Assert.IsTrue(_repo.AddMenuItemToDirectory(_menuItem));
         }

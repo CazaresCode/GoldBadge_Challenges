@@ -122,7 +122,7 @@ namespace _02_Challenge_Console
             Console.Clear();
 
             Console.WriteLine("\nEnter the Claim Number:");
-            int claimID = Convert.ToInt32(Console.ReadLine());
+            int claimId = Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine("\nEnter the Number corrosponding to the Claim Type:\n" +
                 "\t1. Car\n" +
@@ -144,7 +144,7 @@ namespace _02_Challenge_Console
 
             
 
-            Claim claim = new Claim (claimID, typeOfClaim, description, amount, dateIncident, dateClaim);
+            Claim claim = new Claim (claimId, typeOfClaim, description, amount, dateIncident, dateClaim);
             return claim;
         }
 
