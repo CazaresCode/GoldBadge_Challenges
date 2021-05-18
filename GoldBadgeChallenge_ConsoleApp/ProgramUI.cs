@@ -25,7 +25,7 @@ namespace GoldBadgeChallenge_ConsoleApp
         //HOW TO MAKE THIS BOOL A MENU WITH SWITCH CASE AND NOT IF STATEMENT
         private bool Menu()
         {
-            Console.WriteLine("Please enter the number of the action you would like to do:\n" +
+            Console.WriteLine("Please enter the NUMBER of the action you would like to do:\n\n" +
                 "1. Add a New Menu Item\n" +
                 "2. Get a List of Menu Items\n" +
                 "3. Get a Menu Item By Name\n" +

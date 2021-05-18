@@ -20,14 +20,14 @@ namespace _02_Challenge_Repository
         }
 
         // Read
-        public Claim PeekClaimFromQueue()
-        {
-            return _queueOfClaims.Peek();
-        }
-
         public Queue<Claim> GetAllClaimsFromQueue()
         {
             return _queueOfClaims;
+        }
+
+        public Claim PeekClaimFromQueue()
+        {
+            return _queueOfClaims.Peek();
         }
 
         public Claim GetClaimsFromQueueById(int claimID)
@@ -65,34 +65,18 @@ namespace _02_Challenge_Repository
         }
 
         // Dequeue
-
-        public bool RemoveFirstClaimFromQuene(int claimNumber)
+        public bool DequeueFirstClaim(string response)
         {
-            Claim claim = GetClaimsFromQueueById(claimNumber);
-
-            if (claim == null)
-            {
-                return false;
-            }
 
             int intialCount = _queueOfClaims.Count;
-            _queueOfClaims.Dequeue();
 
-            if (intialCount > _queueOfClaims.Count)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool DequeueClaimFromQueue(char response)
-        {
-            if (response == 'y')
+            if (response == "y" || response == "yes")
             {
                 _queueOfClaims.Dequeue();
+                return true;
+            }
+            if (intialCount > _queueOfClaims.Count)
+            {
                 return true;
             }
             else
