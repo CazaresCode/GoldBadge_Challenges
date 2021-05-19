@@ -1,0 +1,6 @@
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\03_Challenge_Repository\bin\Debug\03_Challenge_Repository.dll
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\03_Challenge_Repository\bin\Debug\03_Challenge_Repository.pdb
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\03_Challenge_Repository\obj\Debug\03_Challenge_Repository.csprojAssemblyReference.cache
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\03_Challenge_Repository\obj\Debug\03_Challenge_Repository.csproj.CoreCompileInputs.cache
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\03_Challenge_Repository\obj\Debug\03_Challenge_Repository.dll
+C:\Users\alexa\Desktop\ElevenFiftyProjects\GoldBadge\ChallengeFolder\GoldBadgeChallenge_ConsoleApp\03_Challenge_Repository\obj\Debug\03_Challenge_Repository.pdb
