@@ -67,17 +67,21 @@ namespace _02_Challenge_Repository
         // Dequeue
         public bool DequeueFirstClaim(string response)
         {
-
+            string userResponse = response.ToLower();
             int intialCount = _queueOfClaims.Count;
 
-            if (response == "y" || response == "yes")
+            if (userResponse == "y" || userResponse == "yes")
             {
                 _queueOfClaims.Dequeue();
-                return true;
-            }
-            if (intialCount > _queueOfClaims.Count)
-            {
-                return true;
+
+                if (intialCount > _queueOfClaims.Count)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -86,7 +90,6 @@ namespace _02_Challenge_Repository
         }
 
         // Delete any object
-        //not sure if this would work...
         public bool DeleteClaimFromList(int claimNumber)
         {
             Claim claimToDelete = GetClaimsFromQueueById(claimNumber);
@@ -100,31 +103,31 @@ namespace _02_Challenge_Repository
 
                 foreach (var item in _queueOfClaims)
                 {
-                        Queue<int> newQueue = new Queue<int>(new int[] { item.ClaimID });
+                    Queue<int> newQueue = new Queue<int>(new int[] { item.ClaimID });
 
-                        newQueue = new Queue<int>(newQueue.Where(x => x != claimToDelete.ClaimID));
-                        int updatedClaimCount = newQueue.Count();
+                    newQueue = new Queue<int>(newQueue.Where(x => x != claimToDelete.ClaimID));
+                    int updatedClaimCount = newQueue.Count();
 
-                        foreach (var newItem in newQueue)
+                    foreach (var newItem in newQueue)
+                    {
+                        if (newItem == item.ClaimID)
                         {
-                            if (newItem == item.ClaimID)
-                            {
-                                _queueOfClaims.Enqueue(item);
+                            _queueOfClaims.Enqueue(item);
 
-                                if (initalCount > updatedClaimCount)
-                                {
-                                    return true;
-                                }
-                                else
-                                {
-                                    return false;
-                                }
+                            if (initalCount > updatedClaimCount)
+                            {
+                                return true;
                             }
                             else
                             {
                                 return false;
                             }
                         }
+                        else
+                        {
+                            return false;
+                        }
+                    }
                 }
                 return true;
             }

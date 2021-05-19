@@ -35,16 +35,46 @@ namespace _02_Challenge_Test
         [TestMethod]
         public void PeekClaimFromQueue_ShouldBeTrue()
         {
-            Assert.AreEqual(_repo.PeekClaimFromQueue(), _claim);
+            Assert.AreEqual( _claim, _repo.PeekClaimFromQueue());
         }
-
 
         // How do you test this?
         [TestMethod]
         public void GetClaimsFromQueueById_ShouldBeCorrectObject()
         {
-            var claim = _repo.GetClaimsFromQueueById(1);
+            Claim claim = _repo.GetClaimsFromQueueById(1);
             Assert.AreEqual( _claim, claim);
         }
+
+        [TestMethod]
+        public void UpdateExisitingClaimByID_ShouldBeTrue()
+        {
+            _repo.UpdateExisitingClaimByID(1, new Claim(2, ClaimType.Home, "kitchen fire.", 40000.00m, new DateTime(2018, 04, 20), new DateTime(2018, 04, 30)));
+
+            Assert.AreEqual(_claim.ClaimID, 2);
+        }
+
+        [TestMethod]
+        public void DequeueFirstClaim_ShouldBeTrue()
+        {
+            _repo.DequeueFirstClaim("y");
+            int count = _repo.GetAllClaimsFromQueue().Count;
+
+            Assert.AreEqual(0, count);
+        }
+
+        [TestMethod]
+        public void DeleteClaimFromList_ShouldBeTrue()
+        {
+            Claim newClaim = new Claim(20, ClaimType.Home, "kitchen fire.", 40000.00m, new DateTime(2018, 04, 20), new DateTime(2018, 04, 30));
+            _repo.AddClaimToDirectory(newClaim);
+            _repo.DequeueFirstClaim("y");
+            int number = _repo.PeekClaimFromQueue().ClaimID;
+            int count = _repo.GetAllClaimsFromQueue().Count;
+
+            Assert.AreEqual(newClaim.ClaimID, number);
+            Assert.AreEqual(1, count);
+        }
+
     }
 }
