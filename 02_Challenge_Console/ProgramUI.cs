@@ -9,7 +9,6 @@ namespace _02_Challenge_Console
 {
     public class ProgramUI
     {
-
         private ClaimRepository _repo = new ClaimRepository();
         public void Run()
         {
@@ -24,13 +23,13 @@ namespace _02_Challenge_Console
         private bool Menu()
         {
             Console.WriteLine("Please enter the NUMBER of the action you would like to do:\n\n" +
-                "1. Display All Claims\n" +
-                "2. Accept Next Claim\n" +
-                "3. Add New Claim\n" +
-                "4. Search Claim By Claim Number\n" +
-                "5. Update Exisiting Claim By Claim Number\n" +
-                "6. DeleteClaim\n" +
-                "7. Exit");
+                "\t1. Display All Claims\n" +
+                "\t2. Accept Next Claim\n" +
+                "\t3. Add New Claim\n" +
+                "\t4. Search Claim By Claim Number\n" +
+                "\t5. Update Exisiting Claim By Claim Number\n" +
+                "\t6. DeleteClaim\n" +
+                "\t7. Exit");
 
             string input = Console.ReadLine().ToLower();
 
@@ -77,7 +76,7 @@ namespace _02_Challenge_Console
         {
             Console.Clear();
 
-            _repo.PeekClaimFromQueue();
+            Console.WriteLine(_repo.PeekClaimFromQueue());
             Console.WriteLine("Would you like to deal with this claim now?\n" +
                 "\tPlease enter [Y]es or[N]o.");
             if(_repo.DequeueFirstClaim(Console.ReadLine().ToLower()))
@@ -133,7 +132,6 @@ namespace _02_Challenge_Console
 
 
         //helper methods:
-
         private Claim GetValuesForClaimObjects()
         {
             Console.Clear();

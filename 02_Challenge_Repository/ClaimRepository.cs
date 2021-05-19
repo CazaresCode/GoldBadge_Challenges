@@ -89,48 +89,49 @@ namespace _02_Challenge_Repository
             }
         }
 
-        // Delete any object
-        //public bool DeleteClaimFromList(int claimNumber)
-        //{
-        //    Claim claimToDelete = GetClaimsFromQueueById(claimNumber);
-        //    if (claimToDelete == null)
-        //    {
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        int initalCount = _queueOfClaims.Count();
+        //Delete any object
+        public bool DeleteClaimFromList(int claimNumber)
+        {
+            Claim claimToDelete = GetClaimsFromQueueById(claimNumber);
+            if (claimToDelete == null)
+            {
+                return false;
+            }
+            else
+            {
+                int initalCount = _queueOfClaims.Count();
 
-        //        foreach (var item in _queueOfClaims)
-        //        {
-        //            Queue<int> newQueue = new Queue<int>(new int[] { item.ClaimID });
+                foreach (var item in _queueOfClaims)
+                {
+                    Queue<int> newQueue = new Queue<int>(new int[] { item.ClaimID });
 
-        //            newQueue = new Queue<int>(newQueue.Where(x => x != claimToDelete.ClaimID));
-        //            int updatedClaimCount = newQueue.Count();
+                    newQueue = new Queue<int>(newQueue.Where(x => x != claimToDelete.ClaimID));
+                    int updatedClaimCount = newQueue.Count();
 
-        //            foreach (var newItem in newQueue)
-        //            {
-        //                if (newItem == item.ClaimID)
-        //                {
-        //                    _queueOfClaims.Enqueue(item);
+                    foreach (var newItem in newQueue)
+                    {
+                        if (newItem != claimToDelete.ClaimID)
+                        {
+                            _queueOfClaims.Clear();
+                            _queueOfClaims.Enqueue(item);
 
-        //                    if (initalCount > updatedClaimCount)
-        //                    {
-        //                        return true;
-        //                    }
-        //                    else
-        //                    {
-        //                        return false;
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    return false;
-        //                }
-        //            }
-        //        }
-        //        return true;
-        //    }
-        //}
+                            if (initalCount > updatedClaimCount)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
     }
 }

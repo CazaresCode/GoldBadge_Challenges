@@ -63,31 +63,21 @@ namespace _02_Challenge_Test
             Assert.AreEqual(0, count);
         }
 
+        [TestMethod]
+        public void DeleteClaimFromList_ShouldBeTrue()
+        {
+            Claim newClaim = new Claim(3, ClaimType.Home, "kitchen fire.", 40000.00m, new DateTime(2018, 04, 20), new DateTime(2018, 04, 30));
 
-        //firgure it out!
-        //[TestMethod]
-        //public void DeleteClaimFromList_ShouldBeTrue()
-        //{
-        //    Claim newClaim = new Claim(20, ClaimType.Home, "kitchen fire.", 40000.00m, new DateTime(2018, 04, 20), new DateTime(2018, 04, 30));
+            _repo.AddClaimToDirectory(newClaim);
+            Assert.IsTrue(_repo.GetAllClaimsFromQueue().Contains(newClaim));
+            int firstCount = _repo.GetAllClaimsFromQueue().Count;
+            Assert.AreEqual(2, firstCount);
 
-        //    _repo.AddClaimToDirectory(newClaim);
-        //    int firstCount = _repo.GetAllClaimsFromQueue().Count;
-        //    Assert.AreEqual(2, firstCount);
+            _repo.DeleteClaimFromList(newClaim.ClaimID);
+            int secondCount = _repo.GetAllClaimsFromQueue().Count;
+            Assert.AreEqual(1, secondCount);
 
-        //    _repo.DeleteClaimFromList(newClaim.ClaimID);
-        //    int secondCount = _repo.GetAllClaimsFromQueue().Count;
-        //    Assert.AreEqual(1, secondCount);
-
-            //_repo.AddClaimToDirectory(newClaim);
-            //int number = _repo.GetAllClaimsFromQueue().Count;
-            //_repo.DeleteClaimFromList(1);
-            //int number1 = _repo.PeekClaimFromQueue().ClaimID;
-            //int count = _repo.GetAllClaimsFromQueue().Count;
-
-            //Assert.AreEqual(2, number);
-            //Assert.AreEqual(20, newClaim.ClaimID);
-            //Assert.AreEqual(1, number1);
-            //Assert.AreEqual(count, 1);
-        //}
+            Assert.AreEqual(_claim, _repo.PeekClaimFromQueue()); 
+        }
     }
 }
