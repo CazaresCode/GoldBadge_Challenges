@@ -28,7 +28,7 @@ namespace _02_Challenge_Console
                 "\t3. Add New Claim\n" +
                 "\t4. Search Claim By Claim Number\n" +
                 "\t5. Update Exisiting Claim By Claim Number\n" +
-                "\t6. DeleteClaim\n" +
+                "\t6. Delete Claim\n" +
                 "\t7. Exit");
 
             string input = Console.ReadLine().ToLower();
@@ -51,7 +51,7 @@ namespace _02_Challenge_Console
                     UpdateExisitingClaimByClaimNumber();
                     break;
                 case "6":
-                    //DeleteClaim();
+                    DeleteClaim();
                     break;
                 case "7":
                     return false;
@@ -76,16 +76,18 @@ namespace _02_Challenge_Console
         {
             Console.Clear();
 
-            Console.WriteLine(_repo.PeekClaimFromQueue());
+            var firstQueueClaim = _repo.PeekClaimFromQueue();
+            DisplayAllClaimProp(firstQueueClaim);
             Console.WriteLine("Would you like to deal with this claim now?\n" +
                 "\tPlease enter [Y]es or[N]o.");
+
             if(_repo.DequeueFirstClaim(Console.ReadLine().ToLower()))
             {
                 Console.WriteLine("\nYou accepted the claim.");
             }
             else
             {
-                Console.WriteLine("\nYou were not able to take on this claim. Please contact your IT specalist.");
+                Console.WriteLine("\nYou did not take on this claim.");
             }
         }
 
@@ -95,29 +97,46 @@ namespace _02_Challenge_Console
 
             Claim newClaim = GetValuesForClaimObjects();
 
-            _repo.AddClaimToDirectory(newClaim);
+            if(_repo.AddClaimToDirectory(newClaim))
+            {
+                Console.WriteLine("You successfully ADDED a claim!");
+            }
+            else
+            {
+                Console.WriteLine("Unable to process claim");
+            }
         }
 
         private void SearchClaimByClaimNumber()
         {
             Console.Clear();
             DisplayAllClaims();
-            Console.WriteLine("\nPlease enter the Claim NUMBER you would like to see:");
+            Console.WriteLine("\nPlease enter the Claim NUMBER you would like to DISPLAY:\n");
 
-            _repo.GetClaimsFromQueueById(Convert.ToInt32(Console.ReadLine()));
+            Claim claim = _repo.GetClaimsFromQueueById(Convert.ToInt32(Console.ReadLine()));
+
+            if (_repo.GetClaimsFromQueueById(claim.ClaimID) != null)
+            {
+                Console.Clear();
+                DisplayAllClaimProp(claim);
+            }
+            else
+            {
+                Console.WriteLine("There is no claim  with that NUMBER.");
+            }
         }
 
         private void UpdateExisitingClaimByClaimNumber()
         {
             Console.Clear();
             DisplayAllClaims();
-            Console.WriteLine("\nPlease enter the Claim NUMBER you would like to update:");
+            Console.WriteLine("\nPlease enter the Claim NUMBER you would like to UPDATE:");
 
            Claim oldClaim=  _repo.GetClaimsFromQueueById(Convert.ToInt32(Console.ReadLine()));
             
             if(_repo.UpdateExisitingClaimByID(oldClaim.ClaimID, GetValuesForClaimObjects()))
             {
-                Console.WriteLine("You successfully updated the claim!");
+                Console.WriteLine("You successfully UPDATED the claim!");
             }
             else
             {
@@ -125,10 +144,21 @@ namespace _02_Challenge_Console
             }
         }
 
-        //private void DeleteClaim()
-        //{
-
-        //}
+        private void DeleteClaim()
+        {
+            Console.Clear();
+            DisplayAllClaims();
+            Console.WriteLine("\nPlease enter the Claim NUMBER you would like to DELETE:");
+            int claimToDelete = Convert.ToInt32(Console.ReadLine());
+           if(_repo.DeleteClaimFromList(claimToDelete))
+            {
+                Console.WriteLine("You successfully DELETED the claim!");
+            }
+            else
+            {
+                Console.WriteLine("You are not able to delete this claim. Please contact the nearest human possible.");
+            }
+        }
 
 
         //helper methods:
@@ -166,10 +196,10 @@ namespace _02_Challenge_Console
             Console.WriteLine($"\n\tClaim ID: {c.ClaimID}\n" +
                 $"\tType: {c.TypeOfClaim}\n" +
                 $"\tDescription: {c.Description}\n" +
-                $"\tAmount: {c.ClaimAmount}\n" +
-                $"\tDate of Incident: {c.DateOfIncident}\n" +
-                $"\tDate of Claim: {c.DateOfClaim}\n" +
-                $"\t{c.IsValid}\n");
+                $"\tAmount: ${c.ClaimAmount}\n" +
+                $"\tDate of Incident: {c.DateOfIncident.ToShortDateString()}\n" +
+                $"\tDate of Claim: {c.DateOfClaim.ToShortDateString()}\n" +
+                $"\t{c.Valid()}\n");
         }
 
         private void SeedClaims()

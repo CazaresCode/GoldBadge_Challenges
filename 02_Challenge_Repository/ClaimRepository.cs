@@ -27,7 +27,8 @@ namespace _02_Challenge_Repository
 
         public Claim PeekClaimFromQueue()
         {
-            return _queueOfClaims.Peek();
+            var claim = _queueOfClaims.Peek();
+            return claim;
         }
 
         public Claim GetClaimsFromQueueById(int claimID)
@@ -101,18 +102,19 @@ namespace _02_Challenge_Repository
             {
                 int initalCount = _queueOfClaims.Count();
 
-                foreach (var item in _queueOfClaims)
+                foreach (Claim item in _queueOfClaims)
                 {
                     Queue<int> newQueue = new Queue<int>(new int[] { item.ClaimID });
 
                     newQueue = new Queue<int>(newQueue.Where(x => x != claimToDelete.ClaimID));
                     int updatedClaimCount = newQueue.Count();
+                     
+                    _queueOfClaims.Clear(); // placement?
 
                     foreach (var newItem in newQueue)
                     {
                         if (newItem != claimToDelete.ClaimID)
                         {
-                            _queueOfClaims.Clear();
                             _queueOfClaims.Enqueue(item);
 
                             if (initalCount > updatedClaimCount)

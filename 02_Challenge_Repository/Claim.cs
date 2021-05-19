@@ -16,8 +16,6 @@ namespace _02_Challenge_Repository
         public decimal ClaimAmount { get; set; }
         public DateTime DateOfIncident { get; set; }
         public DateTime DateOfClaim { get; set; }
-        // Figure out how to set IsValid based on if it is valid within 30 days. Would that be a method in the class?
-
         public bool IsValid { get; private set; }
 
         public string Valid()
@@ -27,15 +25,16 @@ namespace _02_Challenge_Repository
 
             if (differenceOfDatesInDays <= 30)
             {
+                IsValid = true;
                 return "This claim is valid.";
             }
             else
             {
+                IsValid = false;
                 return "This claim is NOT valid.";
             }
 
         }
-
 
         public Claim(int claimId, ClaimType typeOfClaim, string description, decimal claimAmount, DateTime dateOfIncident, DateTime dateOfClaim)
         {
