@@ -13,7 +13,7 @@ namespace _02_Challenge_Console
         private ClaimRepository _repo = new ClaimRepository();
         public void Run()
         {
-            //SeedMenuItems();
+            SeedClaims();
             while (Menu())
             {
                 Console.WriteLine("\nPress any key to continue...");
@@ -46,10 +46,10 @@ namespace _02_Challenge_Console
                     AddNewClaim();
                     break;
                 case "4":
-                    //SearchClaimByClaimNumber();
+                    SearchClaimByClaimNumber();
                     break;
                 case "5":
-                    //UpdateExisitingClaimByClaimNumber();
+                    UpdateExisitingClaimByClaimNumber();
                     break;
                 case "6":
                     //DeleteClaim();
@@ -99,15 +99,32 @@ namespace _02_Challenge_Console
             _repo.AddClaimToDirectory(newClaim);
         }
 
-        //private void SearchClaimByClaimNumber()
-        //{
+        private void SearchClaimByClaimNumber()
+        {
+            Console.Clear();
+            DisplayAllClaims();
+            Console.WriteLine("\nPlease enter the Claim NUMBER you would like to see:");
 
-        //}
+            _repo.GetClaimsFromQueueById(Convert.ToInt32(Console.ReadLine()));
+        }
 
-        //private void UpdateExisitingClaimByClaimNumber()
-        //{
+        private void UpdateExisitingClaimByClaimNumber()
+        {
+            Console.Clear();
+            DisplayAllClaims();
+            Console.WriteLine("\nPlease enter the Claim NUMBER you would like to update:");
 
-        //}
+           Claim oldClaim=  _repo.GetClaimsFromQueueById(Convert.ToInt32(Console.ReadLine()));
+            
+            if(_repo.UpdateExisitingClaimByID(oldClaim.ClaimID, GetValuesForClaimObjects()))
+            {
+                Console.WriteLine("You successfully updated the claim!");
+            }
+            else
+            {
+                Console.WriteLine("You are not able to updated this claim. Please contact the nearest human possible.");
+            }
+        }
 
         //private void DeleteClaim()
         //{
@@ -142,8 +159,6 @@ namespace _02_Challenge_Console
             Console.WriteLine("\nEnter the date of Claim (MM/DD/YYYY):");
             DateTime dateClaim= DateTime.Parse(Console.ReadLine());
 
-            
-
             Claim claim = new Claim (claimId, typeOfClaim, description, amount, dateIncident, dateClaim);
             return claim;
         }
@@ -159,6 +174,11 @@ namespace _02_Challenge_Console
                 $"\t{c.IsValid}\n");
         }
 
-
+        private void SeedClaims()
+        {
+            _repo.AddClaimToDirectory(new Claim(1, ClaimType.Car, "Car accident on 465.", 400.00m, new DateTime(2018, 04, 25), new DateTime(2018, 04, 27)));
+            _repo.AddClaimToDirectory(new Claim(2, ClaimType.Home, "house fire.", 400000.00m, new DateTime(2018, 03, 25), new DateTime(2018, 04, 30)));
+            _repo.AddClaimToDirectory(new Claim(3, ClaimType.Theft, "pokemon cards stolen.", 300.00m, new DateTime(2018, 02, 25), new DateTime(2018, 03, 27)));
+        }
     }
 }
