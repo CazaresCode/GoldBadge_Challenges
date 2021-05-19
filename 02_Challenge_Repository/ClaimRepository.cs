@@ -149,39 +149,41 @@ namespace _02_Challenge_Repository
             {
                 int initalCount = _queueOfClaims.Count();
 
-                foreach (Claim item in _queueOfClaims)
+                Queue<Claim> queueCopy = new Queue<Claim>();
+
+                foreach (var claim in _queueOfClaims)
                 {
-                    List<Claim> newListObj = new List<Claim>();
-                    newListObj.Add(item);
-                    newListObj.Remove(claimToDelete);
-
-                    //List<Claim> newListObj = new List<Claim>(new Claim[] { item });
-                    //newListObj = new List<Claim>(newListObj.Where(x => x != claimToDelete));
-                    int updatedClaimCount = newListObj.Count();
-
-
-                    foreach (Claim newItem in newListObj)
+                    while (_queueOfClaims.Count > 0)
                     {
-                        _queueOfClaims.Clear(); // placement?
+                        foreach (var item in _queueOfClaims)
+                        {
+                            if (item != claimToDelete && item != null)
+                            {
+                                var itemObj = _queueOfClaims.Dequeue();
+                                queueCopy.Enqueue(itemObj);
 
-                        do
-                        {
-                            _queueOfClaims.Enqueue(item);
-                        }
-                        while (initalCount - 1 == updatedClaimCount);
+                                _queueOfClaims.Clear(); // placement?
 
-                        if (initalCount > updatedClaimCount)
-                        {
-                            return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
                         }
-                        else
-                        {
-                            return false;
-                        }
+                    }
+
+                }
+                int updatedClaimCount = queueCopy.Count();
+                if (initalCount > updatedClaimCount)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
-            return false;
         }
     }
 }
-}
+
