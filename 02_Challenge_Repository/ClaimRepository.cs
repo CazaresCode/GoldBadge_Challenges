@@ -108,8 +108,8 @@ namespace _02_Challenge_Repository
 
                     newQueue = new Queue<int>(newQueue.Where(x => x != claimToDelete.ClaimID));
                     int updatedClaimCount = newQueue.Count();
-                     
-                    _queueOfClaims.Clear(); // placement?
+
+                    _queueOfClaims.Clear(); // [placement?
 
                     foreach (var newItem in newQueue)
                     {
@@ -135,5 +135,53 @@ namespace _02_Challenge_Repository
                 return false;
             }
         }
+
+
+
+        public bool DeleteClaimFromListWORKAROUND(int claimNumber)
+        {
+            Claim claimToDelete = GetClaimsFromQueueById(claimNumber);
+            if (claimToDelete == null)
+            {
+                return false;
+            }
+            else
+            {
+                int initalCount = _queueOfClaims.Count();
+
+                foreach (Claim item in _queueOfClaims)
+                {
+                    List<Claim> newListObj = new List<Claim>();
+                    newListObj.Add(item);
+                    newListObj.Remove(claimToDelete);
+
+                    //List<Claim> newListObj = new List<Claim>(new Claim[] { item });
+                    //newListObj = new List<Claim>(newListObj.Where(x => x != claimToDelete));
+                    int updatedClaimCount = newListObj.Count();
+
+
+                    foreach (Claim newItem in newListObj)
+                    {
+                        _queueOfClaims.Clear(); // placement?
+
+                        do
+                        {
+                            _queueOfClaims.Enqueue(item);
+                        }
+                        while (initalCount - 1 == updatedClaimCount);
+
+                        if (initalCount > updatedClaimCount)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                }
+            }
+            return false;
+        }
     }
+}
 }

@@ -51,7 +51,7 @@ namespace _02_Challenge_Console
                     UpdateExisitingClaimByClaimNumber();
                     break;
                 case "6":
-                    DeleteClaim();
+                    DeleteClaimWORKAROUND();
                     break;
                 case "7":
                     return false;
@@ -160,6 +160,21 @@ namespace _02_Challenge_Console
             }
         }
 
+        private void DeleteClaimWORKAROUND()
+        {
+            Console.Clear();
+            DisplayAllClaims();
+            Console.WriteLine("\nPlease enter the Claim NUMBER you would like to DELETE:");
+            int claimToDelete = Convert.ToInt32(Console.ReadLine());
+            if (_repo.DeleteClaimFromListWORKAROUND(claimToDelete))
+            {
+                Console.WriteLine("You successfully DELETED the claim!");
+            }
+            else
+            {
+                Console.WriteLine("You are not able to delete this claim. Please contact the nearest human possible.");
+            }
+        }
 
         //helper methods:
         private Claim GetValuesForClaimObjects()
