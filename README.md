@@ -44,4 +44,4 @@ Pull requests are not welcome due to the nature of this project. However, any ad
 Alexandro Cazares
 
 ## License
-[MIT LICENCE](../LICENCE.txt)
+[MIT LICENCE](https://github.com/CazaresCode/GoldBadge_Challenges/commit/0d2bb8e4a015294966fd56a476518ecd4462e845)
