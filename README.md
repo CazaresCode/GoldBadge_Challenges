@@ -1,11 +1,17 @@
 # Gold Badge Challenges
 
-Gold Badge Challenges is a file that contains 3 Console Applications for Eleven Fifthy Academy Software Development Bootcamp. The prompt is to create seperate console apps for each challenge as a capstone project for the Gold Badge.
-The three challenges in this file are:
+Gold Badge Challenges is a file that contains 3 Console Applications for 3 seperate challenges. Each one has their own:
+* Program UI
+* Repository
+* Repository Test Methods 
 
+This file is for Eleven Fifthy Academy Software Development Bootcamp Gold Badge requirement.
+
+The three challenges in this file are:
 1. [Komodo Cafe](#cafe)
 2. [Komodo Claims](#claims)
 3. [Komodo Badges](#badges)
+
 
 ## Technologies Used
 
@@ -13,9 +19,11 @@ The three challenges in this file are:
 - C#
 - GitHub
 
+
 ## Installation
 
 It is highly recommended to use Visual Studio 2019 Community. You may download the free application by [clicking here](https://visualstudio.microsoft.com/downloads/).
+
 
 ## Usage
 
@@ -36,8 +44,10 @@ Not only did Komodo Insurance request an application for their insurance claims,
 This console app uses a dictionary to maintain and grant access to certain doors by using their Badge ID number.
 You can edit an existing badge by adding or removing doors. You can also see all the keys in the dictionary and their respective values. 
 
+
 ## Contributing
 Pull requests are not welcome due to the nature of this project. However, any advice would be greatly appreciated.
+
 
 ## Author
 Alexandro Cazares
