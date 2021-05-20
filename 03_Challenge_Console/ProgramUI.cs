@@ -55,7 +55,7 @@ namespace _03_Challenge_Console
         private void AddBadge()
         {
             Console.Clear();
-            Console.WriteLine("ADD BADGE\n\n");
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~ADD BADGE~~~~~~~~~~~~~~~~~~~~~~\n\n");
 
             Console.WriteLine("What is the number of the badge:");
             int badgeID = Convert.ToInt32(Console.ReadLine());
@@ -67,15 +67,15 @@ namespace _03_Challenge_Console
             bool keepAsking = true;
             while (keepAsking)
             {
-                Console.WriteLine("\nAny other doors? Enter Yes or No:");
+                Console.WriteLine("\nAny other doors? Enter [Y]es or [N]o:");
                 string userResponse = Console.ReadLine().ToLower();
-                if (userResponse == "yes")
+                if (userResponse == "yes" || userResponse == "y")
                 {
                     Console.WriteLine("\nList another door that it needs access to (ex. A1):");
                     string addDoor = Console.ReadLine().ToUpper();
                     listResponse.Add(addDoor);
                 }
-                else if (userResponse == "no")
+                else if (userResponse == "no" || userResponse == "n")
                 {
                     keepAsking = false;
                 }
@@ -174,6 +174,7 @@ namespace _03_Challenge_Console
 
                         int secondCount = badge.Value.Count;
                         var list2 = badge.Value;
+                        list2.Sort();
                         var valueAsStringAgain = string.Join(", ", list2);
 
                         if (secondCount > firstCount)
@@ -222,6 +223,7 @@ namespace _03_Challenge_Console
 
                         int secondCount = badge.Value.Count;
                         var list2 = badge.Value;
+                        list2.Sort();
                         var valueAsStringAgain = string.Join(", ", list2);
 
                         if (secondCount < firstCount)
@@ -253,6 +255,7 @@ namespace _03_Challenge_Console
                 foreach (var badge in dict.OrderBy(key => key.Key))
                 {
                     var list = badge.Value;
+                    list.Sort();
                     var valueAsString = string.Join(", ", list);
                     Console.WriteLine($"\n\tBadge ID {badge.Key} has access to doors: {valueAsString}.");
                 }
