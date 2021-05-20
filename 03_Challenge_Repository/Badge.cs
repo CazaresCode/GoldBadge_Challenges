@@ -9,7 +9,7 @@ namespace _03_Challenge_Repository
     public class Badge
     {
         public int BadgeID { get; set; }
-        public List<string> DoorName { get; set; } // do we make this set?
+        public List<string> DoorName { get; set; } 
 
         public Badge(int badgeID, List<string> doorName)
         {

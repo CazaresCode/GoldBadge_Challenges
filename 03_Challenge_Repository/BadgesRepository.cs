@@ -8,18 +8,9 @@ namespace _03_Challenge_Repository
 {
     public class BadgesRepository
     {
-        private readonly List<Badge> _badges = new List<Badge>();
         private readonly Dictionary<int, List<string>> _dictionary = new Dictionary<int, List<string>>();
 
         //CREATE
-        public bool AddBadgeToList(Badge badge)
-        {
-            int initialCount = _badges.Count;
-            _badges.Add(badge);
-            bool wasAdded = _badges.Count > initialCount;
-            return wasAdded;
-        }
-
         public bool AddBadgeToDictionary(Badge badge)
         {
             int initialCount = _dictionary.Count;
@@ -30,59 +21,37 @@ namespace _03_Challenge_Repository
             return wasAdded;
         }
 
-
-
         //READ
-        public List<Badge> GetListBadge()
+        public Dictionary<int, List<string>> GetListBadge()
         {
-            return _badges;
+            return _dictionary;
         }
+ 
 
         //UPDATE ADD
-        public bool EditDoorAddByID(int badgeNum, string doorName)
+        public bool EditDoorAddByID(int badgeID, string doorName)
         {
-            Badge old = GetBadgeObjectByID(badgeNum);
-            int firstCount = old.DoorName.Count;
-            old.DoorName.Add(doorName);
-            int secondCount = old.DoorName.Count;
-            if (firstCount > secondCount)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            int firstCount = _dictionary[badgeID].Count;
+            _dictionary[badgeID].Add(doorName);
+            int secondCount = _dictionary[badgeID].Count;
+
+            return secondCount > firstCount;
         }
 
         //UPDATE REMOVE
-        public bool EditDoorRemoveByID(int badgeNum, string doorName)
+        public bool EditDoorRemoveByID(int badgeID, string doorName)
         {
-            Badge old = GetBadgeObjectByID(badgeNum);
-            int firstCount = old.DoorName.Count;
-            old.DoorName.Remove(doorName);
-            int secondCount = old.DoorName.Count;
-            if (firstCount > secondCount)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            int firstCount = _dictionary[badgeID].Count;
+            _dictionary[badgeID].Remove(doorName);
+            int secondCount = _dictionary[badgeID].Count;
+
+            return secondCount < firstCount;
         }
 
         //HELPER METHODS
-        public Badge GetBadgeObjectByID(int badgeID)
+        public List<string> GetBadgeInfoByID(int badgeID)
         {
-            foreach (var item in _badges)
-            {
-                if (item.BadgeID == badgeID)
-                {
-                    return item;
-                }
-            }
-            return null;
+            return _dictionary[badgeID];
         }
     }
 }

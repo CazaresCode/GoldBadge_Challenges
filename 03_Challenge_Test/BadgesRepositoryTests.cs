@@ -20,12 +20,6 @@ namespace _03_Challenge_Test
         }
 
         [TestMethod]
-        public void AddBadgeToList_ShouldBeTrue()
-        {
-            Assert.IsTrue(_repo.AddBadgeToList(_badge));
-        }
-
-        [TestMethod]
         public void AddBadgeToDirectory_ShouldBeTrue()
         {
             Assert.IsTrue(_repo.AddBadgeToDictionary(_badge));
