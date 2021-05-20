@@ -1,6 +1,7 @@
 ﻿using _01_Challenge_Repository;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,38 +26,40 @@ namespace GoldBadgeChallenge_ConsoleApp
         //HOW TO MAKE THIS BOOL A MENU WITH SWITCH CASE AND NOT IF STATEMENT
         private bool Menu()
         {
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MAIN MENU~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
             Console.WriteLine("Please enter the NUMBER of the action you would like to do:\n\n" +
-                "\t1. Add a New Menu Item\n" +
-                "\t2. See a List of Menu Items\n" +
-                "\t3. Search a Menu Item By Name\n" +
-                "\t4. Search a Menu Item By Number\n" +
+                "\t1. Add New Menu Item\n" +
+                "\t2. See List of Menu Items\n" +
+                "\t3. Search Menu Item By Name\n" +
+                "\t4. Search Menu Item By Number\n" +
                 "\t5. Update Exisiting Menu Item By Name\n" +
-                "\t6. Remove a Menu Item\n" +
+                "\t6. Remove Menu Item\n" +
                 "\t7. Exit");
 
-            string input = Console.ReadLine().ToLower();
+            int input = Convert.ToInt32(Console.ReadLine());
 
             switch (input)
             {
-                case "1":
+                case 1:
                     AddNewItem();
                     break;
-                case "2":
+                case 2:
                     GetAllMenuItems();
                     break;
-                case "3":
+                case 3:
                     GetItemByName();
                     break;
-                case "4":
+                case 4:
                     DisplayMenuItemByNumber();
                     break;
-                case "5":
+                case 5:
                     UpdateItemByNum();
                     break;
-                case "6":
+                case 6:
                     RemoveItem();
                     break;
-                case "7":
+                case 7:
                     return false;
                 default:
                     Console.WriteLine("\nPlease enter a vaild number");
@@ -68,14 +71,16 @@ namespace GoldBadgeChallenge_ConsoleApp
         private void AddNewItem()
         {
             Console.Clear();
-            MenuItem newItem = GetValuesForMenuItemObjects();
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ADD MENU ITEM~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
+            MenuItem newItem = GetValuesForMenuItemObjects();
             _repo.AddMenuItemToDirectory(newItem);
         }
 
         private void GetAllMenuItems()
         {
             Console.Clear();
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ALL MENU ITEMS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
             foreach (var item in _repo.GetMenuItems())
             {
@@ -86,10 +91,11 @@ namespace GoldBadgeChallenge_ConsoleApp
         private void GetItemByName()
         {
             Console.Clear();
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SEARCH MENU ITEM BY NAME~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
             ShowOnlyMealItemByNumAndName();
 
             Console.WriteLine("\nPlease enter the NAME of the menu item you would like to display:\n");
-
             MenuItem menuItem = _repo.GetMenuItemByName(Console.ReadLine());
 
             if (menuItem != null)
@@ -104,11 +110,12 @@ namespace GoldBadgeChallenge_ConsoleApp
 
         private void DisplayMenuItemByNumber()
         {
-            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~SEARCH MENU ITEM BY NUMBER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
             ShowOnlyMealItemByNumAndName();
 
             Console.WriteLine("\nEnter the NUMBER of the menu item you would like to see:");
-
             bool itemWasFound = Int32.TryParse(Console.ReadLine(), out int result);
 
             if (itemWasFound)
@@ -129,10 +136,11 @@ namespace GoldBadgeChallenge_ConsoleApp
         private void UpdateItemByNum()
         {
             Console.Clear();
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~UPDATE MENU ITEM~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
             ShowOnlyMealItemByNumAndName();
 
             Console.WriteLine("\nPlease enter the NUMBER of the menu item you would like to update:");
-
             bool newItemFound = Int32.TryParse(Console.ReadLine(), out int result);
 
             if (newItemFound)
@@ -156,6 +164,8 @@ namespace GoldBadgeChallenge_ConsoleApp
         private void RemoveItem()
         {
             Console.Clear();
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~REMOVE MENU ITEM~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
             ShowOnlyMealItemByNumAndName();
             Console.WriteLine("\nEnter the NUMBER of the menu item you would like to delete:\n");
 
@@ -200,11 +210,13 @@ namespace GoldBadgeChallenge_ConsoleApp
         {
             string combindedString = string.Join(", ", item.Ingredients);
 
+            var priceAsString = item.Price.ToString("0,0.00", CultureInfo.InvariantCulture);
+
             Console.WriteLine($"\n\t#{item.MealNumber}\n" +
                 $"\tName: {item.MealName}\n" +
                 $"\tDescription: {item.Description}\n" +
                 $"\tIngredients: {combindedString}\n" +
-                $"\tPrice: ${item.Price}\n");
+                $"\tPrice: ${priceAsString}\n");
         }
 
         private void ShowOnlyMealItemByNumAndName()

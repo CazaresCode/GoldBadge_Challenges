@@ -1,6 +1,7 @@
 ﻿using _02_Challenge_Repository;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace _02_Challenge_Console
 
         private bool Menu()
         {
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MAIN MENU~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             Console.WriteLine("Please enter the NUMBER of the action you would like to do:\n\n" +
                 "\t1. Display All Claims\n" +
                 "\t2. Accept Next Claim\n" +
@@ -73,13 +75,13 @@ namespace _02_Challenge_Console
         private void AcceptNextClaim()
         {
             Console.Clear();
-
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~NEXT CLAIM IN QUEUE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             var firstQueueClaim = _repo.PeekClaimFromQueue();
             DisplayAllClaimProp(firstQueueClaim);
             Console.WriteLine("\nWould you like to deal with this claim now?\n" +
                 "\tPlease enter [Y]es or[N]o.");
 
-            if(_repo.DequeueFirstClaim(Console.ReadLine().ToLower()))
+            if (_repo.DequeueFirstClaim(Console.ReadLine().ToLower()))
             {
                 Console.WriteLine("\nYou accepted the claim.");
             }
@@ -96,20 +98,23 @@ namespace _02_Challenge_Console
 
             Claim newClaim = GetValuesForClaimObjects();
 
-            if(_repo.AddClaimToDirectory(newClaim))
+            if (_repo.AddClaimToDirectory(newClaim))
             {
-                Console.WriteLine("You successfully ADDED a claim!");
+                Console.WriteLine("\nYou successfully ADDED a claim!");
             }
             else
             {
-                Console.WriteLine("Unable to process claim");
+                Console.WriteLine("\nUnable to process claim");
             }
         }
 
         private void SearchClaimByClaimNumber()
         {
             Console.Clear();
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SEARCH CLAIM BY CLAIM NUMBER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
             DisplayAllClaims();
+
             Console.WriteLine("\nPlease enter the Claim NUMBER you would like to DISPLAY:\n");
 
             Claim claim = _repo.GetClaimsFromQueueById(Convert.ToInt32(Console.ReadLine()));
@@ -128,26 +133,25 @@ namespace _02_Challenge_Console
         private void UpdateExisitingClaimByClaimNumber()
         {
             Console.Clear();
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~UPDATE CLAIM~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             DisplayAllClaims();
             Console.WriteLine("\nPlease enter the Claim NUMBER you would like to UPDATE:");
 
-           Claim oldClaim=  _repo.GetClaimsFromQueueById(Convert.ToInt32(Console.ReadLine()));
-            
-            if(_repo.UpdateExisitingClaimByID(oldClaim.ClaimID, GetValuesForClaimObjects()))
+            Claim oldClaim = _repo.GetClaimsFromQueueById(Convert.ToInt32(Console.ReadLine()));
+
+            if (_repo.UpdateExisitingClaimByID(oldClaim.ClaimID, GetValuesForClaimObjects()))
             {
-                Console.WriteLine("You successfully UPDATED the claim!");
+                Console.WriteLine("\nYou successfully UPDATED the claim!");
             }
             else
             {
-                Console.WriteLine("You are not able to updated this claim. Please contact the nearest human possible.");
+                Console.WriteLine("\nYou are not able to updated this claim. Please contact the nearest human possible.");
             }
         }
 
         //helper methods:
         private Claim GetValuesForClaimObjects()
         {
-            Console.Clear();
-
             Console.WriteLine("\nEnter the Claim Number:");
             int claimId = Convert.ToInt32(Console.ReadLine());
 
@@ -167,18 +171,20 @@ namespace _02_Challenge_Console
             DateTime dateIncident = DateTime.Parse(Console.ReadLine());
 
             Console.WriteLine("\nEnter the date of Claim (MM/DD/YYYY):");
-            DateTime dateClaim= DateTime.Parse(Console.ReadLine());
+            DateTime dateClaim = DateTime.Parse(Console.ReadLine());
 
-            Claim claim = new Claim (claimId, typeOfClaim, description, amount, dateIncident, dateClaim);
+            Claim claim = new Claim(claimId, typeOfClaim, description, amount, dateIncident, dateClaim);
             return claim;
         }
 
         private void DisplayAllClaimProp(Claim c)
         {
+            var amountAsString = c.ClaimAmount.ToString("0,0.00", CultureInfo.InvariantCulture);
+
             Console.WriteLine($"\n\tClaim ID: {c.ClaimID}\n" +
                 $"\tType: {c.TypeOfClaim}\n" +
                 $"\tDescription: {c.Description}\n" +
-                $"\tAmount: ${c.ClaimAmount}\n" +
+                $"\tAmount: ${amountAsString}\n" +
                 $"\tDate of Incident: {c.DateOfIncident.ToShortDateString()}\n" +
                 $"\tDate of Claim: {c.DateOfClaim.ToShortDateString()}\n" +
                 $"\t{c.Valid()}\n");
