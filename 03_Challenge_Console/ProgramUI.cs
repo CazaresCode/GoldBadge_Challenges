@@ -12,7 +12,7 @@ namespace _03_Challenge_Console
         private BadgesRepository _repo = new BadgesRepository();
         public void Run()
         {
-            //SeedClaims();
+            SeedBadges();
             while (Menu())
             {
                 Console.WriteLine("\nPress any key to continue...");
@@ -26,8 +26,7 @@ namespace _03_Challenge_Console
                 "\t1. Add a Badge \n" +
                 "\t2. Edit a Badge\n" +
                 "\t3. List All Badges\n" +
-                "\t4. Display One Badge\n" +
-                "\t5. Exit");
+                "\t4. Exit");
 
             int input = Convert.ToInt32(Console.ReadLine());
 
@@ -43,9 +42,6 @@ namespace _03_Challenge_Console
                     ListAllBadges();
                     break;
                 case 4:
-                    DisplayBadgeIDAndDoorAccess();
-                    break;
-                case 5:
                     return false;
                 default:
                     Console.WriteLine("\nPlease enter a vaild number");
@@ -62,7 +58,7 @@ namespace _03_Challenge_Console
             Console.WriteLine("What is the number of the badge:");
             int badgeID = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("\nList a door that it needs access to (ex. A1):");
+            Console.WriteLine("\nList the FIRST door that it needs access to (ex. A1):");
             string response = Console.ReadLine().ToUpper();
             List<string> listResponse = new List<string> { response };
 
@@ -103,43 +99,46 @@ namespace _03_Challenge_Console
             Console.Clear();
             Console.WriteLine("EDIT BADGE\n\n");
 
-            RemoveOrAddDoorMenu();
+            while(RemoveOrAddDoorMenu())
+            {
+                Console.WriteLine("\nPress any key to continue...");
+                Console.ReadKey();
+            }
         }
 
-        private void RemoveOrAddDoorMenu()
+        private bool RemoveOrAddDoorMenu()
         {
-            bool looping = true;
-            while (looping)
+            Console.WriteLine("\nEnter the NUMBER you would like to do:\n" +
+                "\t1. Add a Door.\n" +
+                "\t2. Remove a Door.\n" +
+                "\t3. Back to Menu.\n");
+
+            int input = Convert.ToInt32(Console.ReadLine());
+
+            if (input == 1)
             {
-                Console.WriteLine("\nEnter the NUMBER you would like to do:\n" +
-                    "\t1. Add a Door.\n" +
-                    "\t2. Remove a Door.\n" +
-                    "\t3. Back to Menu.\n");
-
-                int input = Convert.ToInt32(Console.ReadLine());
-
-                if (input == 1)
-                {
-                    EditAddDoor();
-                }
-                else if (input == 2)
-                {
-                    EditRemoveDoor();
-                }
-                else if (input == 3)
-                {
-                    looping = false;
-                }
-                else
-                {
-                    Console.WriteLine("\nPlease enter a vaild number");
-                }
+                EditAddDoor();
+                return true;
+            }
+            else if (input == 2)
+            {
+                EditRemoveDoor();
+                return true;
+            }
+            else if (input == 3)
+            {
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("\nPlease enter a vaild number");
+                return true;
             }
         }
 
         private void EditAddDoor()
         {
-            Console.WriteLine("Enter the BADGE ID:");
+            Console.WriteLine("\nEnter the BADGE ID:");
 
             int badgeID = Convert.ToInt32(Console.ReadLine());
 
@@ -216,19 +215,33 @@ namespace _03_Challenge_Console
 
         private void ListAllBadges()
         {
+            Console.Clear();
+            Console.WriteLine("~~~~~~~LIST OF BADGES~~~~~");
             var dict = _repo.GetListBadge();
             if (dict.Count > 0)
             {
                 foreach (var badge in dict)
                 {
-                    Console.WriteLine($"\n{badge.Key} has access to doors: {badge.Value}.");
+                    var list = badge.Value;
+
+                    var valueAsString = string.Join(", ", list);
+
+                    Console.WriteLine($"\n\tBadge ID {badge.Key} has access to doors: {valueAsString}.");
                 }
             }
         }
 
+        private void SeedBadges()
+        {
+            _repo.AddBadgeToDictionary(new Badge(1, new List<string> { "A1", "B1", "A5" }));
+            _repo.AddBadgeToDictionary(new Badge(31, new List<string> { "A1", "B2", "A3" }));
+            _repo.AddBadgeToDictionary(new Badge(3, new List<string> { "A1", "B1", "A7" }));
+        }
+
+        //NOT NEEDED AT THIS MOMENT
         private void DisplayBadgeIDAndDoorAccess()
         {
-            Console.WriteLine("Enter the BADGE ID:");
+            Console.WriteLine("\nEnter the BADGE ID:");
 
             int badgeID = Convert.ToInt32(Console.ReadLine());
 
@@ -236,7 +249,11 @@ namespace _03_Challenge_Console
             {
                 if (badge.Key == badgeID)
                 {
-                    Console.WriteLine($"\n{badge.Key} has access to doors: {badge.Value}.");
+                    var list = badge.Value;
+
+                    var valueAsString = string.Join(", ", list);
+
+                    Console.WriteLine($"\nBadge ID {badge.Key} has access to doors: {valueAsString}.");
                 }
                 else
                 {
