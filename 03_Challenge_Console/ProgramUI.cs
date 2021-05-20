@@ -15,7 +15,7 @@ namespace _03_Challenge_Console
             SeedBadges();
             while (Menu())
             {
-                Console.WriteLine("\nPress any key to continue...");
+                Console.WriteLine("\n\nPress any key to continue...");
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -58,7 +58,7 @@ namespace _03_Challenge_Console
             Console.WriteLine("What is the number of the badge:");
             int badgeID = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("\nList the FIRST door that it needs access to (ex. A1):");
+            Console.WriteLine("\nList the FIRST door that it needs access to (ex. A1) and then press any key to continue:");
             string response = Console.ReadLine().ToUpper();
             List<string> listResponse = new List<string> { response };
 
@@ -70,7 +70,7 @@ namespace _03_Challenge_Console
                 if (userResponse == "yes")
                 {
                     Console.WriteLine("\nList another door that it needs access to (ex. A1):");
-                    string addDoor = Console.ReadLine();
+                    string addDoor = Console.ReadLine().ToUpper();
                     listResponse.Add(addDoor);
                 }
                 else if (userResponse == "no")
@@ -97,12 +97,14 @@ namespace _03_Challenge_Console
         private void EditBadge()
         {
             Console.Clear();
-            Console.WriteLine("EDIT BADGE\n\n");
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EDIT BADGE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n");
 
-            while(RemoveOrAddDoorMenu())
+            while (RemoveOrAddDoorMenu())
             {
-                Console.WriteLine("\nPress any key to continue...");
+                Console.WriteLine("\n\nPress any key to continue...");
                 Console.ReadKey();
+                Console.Clear();
+                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EDIT BADGE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n");
             }
         }
 
@@ -111,7 +113,8 @@ namespace _03_Challenge_Console
             Console.WriteLine("\nEnter the NUMBER you would like to do:\n" +
                 "\t1. Add a Door.\n" +
                 "\t2. Remove a Door.\n" +
-                "\t3. Back to Menu.\n");
+                "\t3. See List of Badges.\n" +
+                "\t4. Back to Menu.\n");
 
             int input = Convert.ToInt32(Console.ReadLine());
 
@@ -126,6 +129,11 @@ namespace _03_Challenge_Console
                 return true;
             }
             else if (input == 3)
+            {
+                ListAllBadges();
+                return true;
+            }
+            else if (input == 4)
             {
                 return false;
             }
@@ -142,85 +150,98 @@ namespace _03_Challenge_Console
 
             int badgeID = Convert.ToInt32(Console.ReadLine());
 
-            foreach (var badge in _repo.GetListBadge())
+            if (_repo.GetListBadge().ContainsKey(badgeID))
             {
-                if (badge.Key == badgeID)
+                foreach (var badge in _repo.GetListBadge())
                 {
-                    Console.WriteLine($"\n{badge.Key} has access to doors: {badge.Value}.");
-
-                    int firstCount = badge.Value.Count;
-
-                    Console.WriteLine("\nEnter the door you would like to ADD (ex. A1):");
-
-                    string additionDoor = Console.ReadLine().ToUpper();
-
-                    badge.Value.Add(additionDoor);
-
-                    int secondCount = badge.Value.Count;
-                    if (secondCount > firstCount)
+                    if (badge.Key == badgeID)
                     {
-                        Console.WriteLine($"\nDoor was ADDED." +
-                            $"\n{badge.Key} has access to doors: {badge.Value}.");
+                        int firstCount = badge.Value.Count;
+
+                        Console.WriteLine($"\n{badge.Key} has access to doors: {badge.Value}.");
+
+                        Console.WriteLine("\nEnter the door you would like to ADD (ex. A1):");
+                        string additionDoor = Console.ReadLine().ToUpper();
+                        badge.Value.Add(additionDoor);
+
+                        int secondCount = badge.Value.Count;
+                        
+                        if (secondCount > firstCount)
+                        {
+                            Console.WriteLine($"\nDoor was ADDED." +
+                                $"\n{badge.Key} has access to doors: {badge.Value}.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nCould NOT add the door.");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("\nCould NOT add the door.");
+                        Console.WriteLine("\nThere is NOT a BADGE ID in the database.");
                     }
                 }
-                else
-                {
-                    Console.WriteLine("\nThere is NOT a BADGE ID in the database.");
-                }
+            }
+            else
+            {
+                Console.WriteLine("\nThere is NOT a BADGE ID in the database.");
             }
         }
 
         private void EditRemoveDoor()
         {
-            Console.WriteLine("Enter the BADGE ID:");
+            Console.WriteLine("\nEnter the BADGE ID:");
 
             int badgeID = Convert.ToInt32(Console.ReadLine());
 
-            foreach (var badge in _repo.GetListBadge())
+            if (_repo.GetListBadge().ContainsKey(badgeID))
             {
-                if (badge.Key == badgeID)
+                foreach (var badge in _repo.GetListBadge())
                 {
-                    Console.WriteLine($"\n{badge.Key} has access to doors: {badge.Value}.");
-
-                    int firstCount = badge.Value.Count;
-
-                    Console.WriteLine("\nEnter the door you would like to REMOVE (ex. A1):");
-
-                    string additionDoor = Console.ReadLine().ToUpper();
-
-                    badge.Value.Remove(additionDoor);
-
-                    int secondCount = badge.Value.Count;
-
-                    if (secondCount < firstCount)
+                    if (badge.Key == badgeID)
                     {
-                        Console.WriteLine($"\nDoor was REMOVED." +
-                            $"\n{badge.Key} has access to doors: {badge.Value}.");
+                        int firstCount = badge.Value.Count;
+                       
+                        Console.WriteLine($"\n{badge.Key} has access to doors: {badge.Value}.");
+                        
+                        Console.WriteLine("\nEnter the door you would like to REMOVE (ex. A1):");
+                        string additionDoor = Console.ReadLine().ToUpper();
+                        badge.Value.Remove(additionDoor);
+
+                        int secondCount = badge.Value.Count;
+
+                        if (secondCount < firstCount)
+                        {
+                            Console.WriteLine($"\nDoor was REMOVED." +
+                                $"\n{badge.Key} has access to doors: {badge.Value}.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nCould NOT remove the door.");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("\nCould NOT remove the door.");
+                        Console.WriteLine("\nThere is NOT a BADGE ID in the database.");
                     }
                 }
-                else
-                {
-                    Console.WriteLine("\nThere is NOT a BADGE ID in the database.");
-                }
+            }
+            else
+            {
+                Console.WriteLine("\nThere is NOT a BADGE ID in the database.");
             }
         }
 
         private void ListAllBadges()
         {
             Console.Clear();
-            Console.WriteLine("~~~~~~~LIST OF BADGES~~~~~");
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~LIST OF BADGES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n");
+
+
             var dict = _repo.GetListBadge();
             if (dict.Count > 0)
             {
-                foreach (var badge in dict)
+                foreach (var badge in dict.OrderBy(key => key.Key))
                 {
                     var list = badge.Value;
 
