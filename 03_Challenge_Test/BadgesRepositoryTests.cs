@@ -16,20 +16,25 @@ namespace _03_Challenge_Test
         {
             _repo = new BadgesRepository();
             _badge = new Badge(123, new List<string> { "A1", "B1", "A2", "A3" });
-            _repo.AddBadgeToList(_badge);
+            _repo.AddBadgeToDictionary(_badge);
         }
 
         [TestMethod]
         public void AddBadgeToDirectory_ShouldBeTrue()
         {
-            Assert.IsTrue(_repo.AddBadgeToDictionary(_badge));
+            bool list = _repo.GetListBadge().ContainsKey(123);
+            Assert.IsTrue(list);
         }
 
+        //NEEDS ATTENTION
         [TestMethod]
         public void GetListBadge_ShouldBeTrue()
         {
-            int initalCount = _repo.GetListBadge().Count;
-            Assert.AreEqual(1, initalCount);
+            //bool contains = _repo.GetListBadge().ContainsKey(123);
+            //Assert.IsTrue(contains);
+
+            int count = _repo.GetListBadge().Count;
+            Assert.AreEqual(1, count);
         }
 
         [TestMethod]
@@ -52,6 +57,15 @@ namespace _03_Challenge_Test
 
             Assert.IsFalse(_badge.DoorName.Contains("A2"));
             Assert.AreEqual(firstCount - 1, secoundCount);
+        }
+
+        [TestMethod]
+        public void GetBadgeInfoByID_ShouldReturnTrue()
+        {
+            var badge= _repo.GetBadgeInfoByID(123);
+            bool value = badge[123].Contains("A1");
+
+            Assert.IsTrue(value);
         }
 
     }
