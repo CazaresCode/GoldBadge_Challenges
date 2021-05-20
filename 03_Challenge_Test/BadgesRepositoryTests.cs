@@ -22,8 +22,7 @@ namespace _03_Challenge_Test
         [TestMethod]
         public void AddBadgeToDirectory_ShouldBeTrue()
         {
-            bool list = _repo.GetListBadge().ContainsKey(123);
-            Assert.IsTrue(list);
+            Assert.IsTrue(_repo.GetListBadge().ContainsKey(123));
         }
 
         //NEEDS ATTENTION
@@ -63,9 +62,7 @@ namespace _03_Challenge_Test
         public void GetBadgeInfoByID_ShouldReturnTrue()
         {
             var badge= _repo.GetBadgeInfoByID(123);
-            bool value = badge[123].Contains("A1");
-
-            Assert.IsTrue(value);
+            Assert.AreEqual(_badge.DoorName, badge);
         }
 
     }
