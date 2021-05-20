@@ -44,4 +44,4 @@ Pull requests are not welcome due to the nature of this project. However, any ad
 Alexandro Cazares
 
 ## License
-[MIT](LICENCE.txt)
+[MIT LICENCE](../LICENCE.txt)
