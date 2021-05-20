@@ -38,7 +38,6 @@ namespace _02_Challenge_Test
             Assert.AreEqual( _claim, _repo.PeekClaimFromQueue());
         }
 
-        // How do you test this?
         [TestMethod]
         public void GetClaimsFromQueueById_ShouldBeCorrectObject()
         {
@@ -61,23 +60,6 @@ namespace _02_Challenge_Test
             int count = _repo.GetAllClaimsFromQueue().Count;
 
             Assert.AreEqual(0, count);
-        }
-
-        [TestMethod]
-        public void DeleteClaimFromList_ShouldBeTrue()
-        {
-            Claim newClaim = new Claim(3, ClaimType.Home, "kitchen fire.", 40000.00m, new DateTime(2018, 04, 20), new DateTime(2018, 04, 30));
-
-            _repo.AddClaimToDirectory(newClaim);
-            Assert.IsTrue(_repo.GetAllClaimsFromQueue().Contains(newClaim));
-            int firstCount = _repo.GetAllClaimsFromQueue().Count;
-            Assert.AreEqual(2, firstCount);
-
-            _repo.DeleteClaimFromList(newClaim.ClaimID);
-            int secondCount = _repo.GetAllClaimsFromQueue().Count;
-            Assert.AreEqual(1, secondCount);
-
-            Assert.AreEqual(_claim, _repo.PeekClaimFromQueue()); 
         }
     }
 }

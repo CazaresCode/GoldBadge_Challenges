@@ -20,6 +20,7 @@ namespace _02_Challenge_Console
                 Console.Clear();
             }
         }
+
         private bool Menu()
         {
             Console.WriteLine("Please enter the NUMBER of the action you would like to do:\n\n" +
@@ -28,8 +29,7 @@ namespace _02_Challenge_Console
                 "\t3. Add New Claim\n" +
                 "\t4. Search Claim By Claim Number\n" +
                 "\t5. Update Exisiting Claim By Claim Number\n" +
-                "\t6. Delete Claim\n" +
-                "\t7. Exit");
+                "\t6. Exit");
 
             string input = Console.ReadLine().ToLower();
 
@@ -51,9 +51,6 @@ namespace _02_Challenge_Console
                     UpdateExisitingClaimByClaimNumber();
                     break;
                 case "6":
-                    DeleteClaimWORKAROUND();
-                    break;
-                case "7":
                     return false;
                 default:
                     Console.WriteLine("\nPlease enter a vaild number");
@@ -61,6 +58,7 @@ namespace _02_Challenge_Console
             }
             return true;
         }
+
         // menu methods:
         private void DisplayAllClaims()
         {
@@ -78,7 +76,7 @@ namespace _02_Challenge_Console
 
             var firstQueueClaim = _repo.PeekClaimFromQueue();
             DisplayAllClaimProp(firstQueueClaim);
-            Console.WriteLine("Would you like to deal with this claim now?\n" +
+            Console.WriteLine("\nWould you like to deal with this claim now?\n" +
                 "\tPlease enter [Y]es or[N]o.");
 
             if(_repo.DequeueFirstClaim(Console.ReadLine().ToLower()))
@@ -94,6 +92,7 @@ namespace _02_Challenge_Console
         private void AddNewClaim()
         {
             Console.Clear();
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ADD NEW CLAIM~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
             Claim newClaim = GetValuesForClaimObjects();
 
@@ -141,38 +140,6 @@ namespace _02_Challenge_Console
             else
             {
                 Console.WriteLine("You are not able to updated this claim. Please contact the nearest human possible.");
-            }
-        }
-
-        private void DeleteClaim()
-        {
-            Console.Clear();
-            DisplayAllClaims();
-            Console.WriteLine("\nPlease enter the Claim NUMBER you would like to DELETE:");
-            int claimToDelete = Convert.ToInt32(Console.ReadLine());
-           if(_repo.DeleteClaimFromList(claimToDelete))
-            {
-                Console.WriteLine("You successfully DELETED the claim!");
-            }
-            else
-            {
-                Console.WriteLine("You are not able to delete this claim. Please contact the nearest human possible.");
-            }
-        }
-
-        private void DeleteClaimWORKAROUND()
-        {
-            Console.Clear();
-            DisplayAllClaims();
-            Console.WriteLine("\nPlease enter the Claim NUMBER you would like to DELETE:");
-            int claimToDelete = Convert.ToInt32(Console.ReadLine());
-            if (_repo.DeleteClaimFromListWORKAROUND(claimToDelete))
-            {
-                Console.WriteLine("You successfully DELETED the claim!");
-            }
-            else
-            {
-                Console.WriteLine("You are not able to delete this claim. Please contact the nearest human possible.");
             }
         }
 
