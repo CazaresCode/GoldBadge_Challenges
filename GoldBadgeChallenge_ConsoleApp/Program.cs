@@ -10,8 +10,8 @@ namespace GoldBadgeChallenge_ConsoleApp
     {
         static void Main(string[] args)
         {
-            ProgramUI app = new ProgramUI();
-            app.Run();
+            ProgramUI ui = new ProgramUI();
+            ui.Run();
         }
     }
 }

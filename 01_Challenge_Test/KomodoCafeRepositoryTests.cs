@@ -38,22 +38,20 @@ namespace _01_Challenge_Test
         public void GetMenuItemByName_ShouldBeEqual()
         {
             MenuItem searchResult = _repo.GetMenuItemByName("sammie");
-            Assert.AreEqual(_menuItem, searchResult);
+            Assert.AreEqual(searchResult, _menuItem);
         }
 
         [TestMethod]
         public void UpdateExisitingMenuItemByNumber_ShouldReturnUpdatedValue()
         {
             _repo.UpdateExisitingMenuItemByNumber(3, new MenuItem(1, "Cuban Sammie", "a very simple  Cuban sandwich", new List<string> { "French Sword Bread", "Ham", "White Cheese", "Grey Poupon" }, 15.95));
-
-            Assert.AreEqual(_menuItem.MealNumber, 1);
+            Assert.AreEqual(1, _menuItem.MealNumber);
         }
 
         [TestMethod]
         public void RemoveMenuItemFromList_ShouldReturnTrue()
         {
             bool wasDeleted = _repo.RemoveMenuItemFromListByNumber(_menuItem.MealNumber);
-
             Assert.IsTrue(wasDeleted);
         }
     }

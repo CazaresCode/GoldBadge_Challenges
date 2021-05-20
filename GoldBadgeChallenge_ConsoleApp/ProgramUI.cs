@@ -26,13 +26,13 @@ namespace GoldBadgeChallenge_ConsoleApp
         private bool Menu()
         {
             Console.WriteLine("Please enter the NUMBER of the action you would like to do:\n\n" +
-                "1. Add a New Menu Item\n" +
-                "2. Get a List of Menu Items\n" +
-                "3. Get a Menu Item By Name\n" +
-                "4. Get a Menu Item By Number\n" +
-                "5. Update Exisiting Menu Item By Name\n" +
-                "6. Remove a Menu Item\n" +
-                "7. Exit");
+                "\t1. Add a New Menu Item\n" +
+                "\t2. See a List of Menu Items\n" +
+                "\t3. Search a Menu Item By Name\n" +
+                "\t4. Search a Menu Item By Number\n" +
+                "\t5. Update Exisiting Menu Item By Name\n" +
+                "\t6. Remove a Menu Item\n" +
+                "\t7. Exit");
 
             string input = Console.ReadLine().ToLower();
 
@@ -87,6 +87,7 @@ namespace GoldBadgeChallenge_ConsoleApp
         {
             Console.Clear();
             ShowOnlyMealItemByNumAndName();
+
             Console.WriteLine("\nPlease enter the NAME of the menu item you would like to display:\n");
 
             MenuItem menuItem = _repo.GetMenuItemByName(Console.ReadLine());
@@ -168,6 +169,7 @@ namespace GoldBadgeChallenge_ConsoleApp
             }
         }
 
+        //HELPER METHODS
         private MenuItem GetValuesForMenuItemObjects()
         {
             Console.Clear();

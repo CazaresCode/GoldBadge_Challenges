@@ -15,14 +15,13 @@ namespace _01_Challenge_Repository
         {
             int startingCount = _listOfMenuItems.Count;
             _listOfMenuItems.Add(item);
-            bool wasAdded = _listOfMenuItems.Count > startingCount;
-            return wasAdded;
+            return (_listOfMenuItems.Count > startingCount);
         }
 
         // Read
         public List<MenuItem> GetMenuItems()
         {
-            return _listOfMenuItems;
+            return _listOfMenuItems.OrderBy(m => m.MealNumber).ToList();
         }
 
         public MenuItem GetMenuItemByName(string menuItemName)
@@ -84,14 +83,7 @@ namespace _01_Challenge_Repository
             int intialCount = _listOfMenuItems.Count;
             _listOfMenuItems.Remove(item);
 
-            if (intialCount > _listOfMenuItems.Count)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return (intialCount > _listOfMenuItems.Count);
         }
     }
 }
